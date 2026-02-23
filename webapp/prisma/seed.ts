@@ -1,5 +1,5 @@
 import prisma from "@/lib/prisma";
-import hashPassword from "@/lib/auth-helper";
+import hashPassword from "@/lib/helpers/auth-helper";
 
 async function main() {
   const defaultAdminUser = await prisma.user.upsert({

@@ -2,9 +2,12 @@ import Image from "next/image";
 
 import { SignIn, SignOut } from "@/components/auth-components"; 
 import { auth } from "@/lib/auth"; 
+import { getUserSession } from "@/lib/helpers/getusersession";
+import { Session } from "next-auth";
+
 const Page = async () => {
-  const session = await auth(); 
-  
+  const session = await getUserSession();
+    
   return (
     <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
       <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
@@ -47,8 +50,10 @@ const Page = async () => {
           ) : (
             <div className="space-y-4">
               <div className="text-center">
-                <p className="text-gray-300">Signed in as:</p>
-                <p className="text-white">{session.user?.email}</p>
+                <p className="text-gray-300">Signed in</p>
+                <pre>
+                  {JSON.stringify(session, null, 2)}
+                </pre>
               </div>
               <div className="text-center">
                 <p className="text-gray-300">Data fetched from DB with Prisma:</p>

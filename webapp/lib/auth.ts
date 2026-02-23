@@ -5,7 +5,7 @@ import { NextAuthConfig } from "next-auth";
 import { PrismaAdapter } from "@auth/prisma-adapter"; 
 import prisma from "@/lib/prisma"; 
 import Credentials from "next-auth/providers/credentials";
-import { comparePassword } from "@/lib/auth-helper";
+import { comparePassword } from "@/lib/helpers/auth-helper";
 
 const config: NextAuthConfig = {
   debug: true,
@@ -46,7 +46,7 @@ const config: NextAuthConfig = {
           id: user.id,
           email: user.email,
           name: user.name,
-          image: user.image,
+          role: user.role,
         };
       },
     }),
