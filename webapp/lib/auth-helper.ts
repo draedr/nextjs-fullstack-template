@@ -3,7 +3,7 @@ import * as bcrypt from 'bcryptjs';
 const saltRounds = 10; // Cost factor
 const password = 'mySecurePassword';
 
-export default function hashPassword(password: string): Promise<string | undefined> {
+function hashPassword(password: string): Promise<string | undefined> {
     return new Promise((resolve, reject) => {
         bcrypt.hash(password, saltRounds, (err, hash) => {
             if (err) {
@@ -17,4 +17,8 @@ export default function hashPassword(password: string): Promise<string | undefin
     });
 }
 
-export { hashPassword }; 
+async function comparePassword(plainPassword: string, hashedPassword: string): Promise<boolean> {
+    return await bcrypt.compare(plainPassword, hashedPassword);
+}
+
+export { hashPassword, comparePassword }; 
